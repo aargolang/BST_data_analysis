@@ -110,6 +110,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BST.cpp" />
+    <ClCompile Include="DataAnalysis.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="TransactionNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BST.h" />
+    <ClInclude Include="DataAnalysis.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="TransactionNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
