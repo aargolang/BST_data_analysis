@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include "Node.h"
 #include "TransactionNode.h"
@@ -9,10 +11,10 @@ public:
 	BST(BST &copyBST);
 	~BST();
 
-	void setRoot();
+	void setRoot(TransactionNode *&newRoot);
 	Node *&getRoot();
 
-	void insert(std::string &newDat); // newDat datatype is debatable
+	bool insert(std::string &newDat); // newDat datatype is debatable
 	void inOrderTraversal();
 	TransactionNode &findSmallest();
 	TransactionNode &findLargest();
@@ -21,7 +23,7 @@ private:
 	Node *mpRoot;
 
 	bool destroyTree();
-	bool insert(Node *&pRoot);
+	bool insert(Node *&pRoot, string &newDat);
 	void inOrderTraversal(Node *&pRoot);
 
 };

@@ -7,7 +7,7 @@ using std::string;
 class Node
 {
 public:
-	Node();
+	Node(string &newData);
 	Node(Node &copyNode);
 	virtual ~Node();
 

@@ -1,9 +1,17 @@
+#pragma once
+
+#include <string>
+#include <iostream>
 #include "Node.h"
 
-class TransactionNode : protected Node
+using std::string;
+using std::cout;
+using std::endl;
+
+class TransactionNode : public Node
 {
 public:
-	TransactionNode();
+	TransactionNode(string &newData, int newUnits = 0);
 	TransactionNode(TransactionNode &copyNode);
 	~TransactionNode();
 
