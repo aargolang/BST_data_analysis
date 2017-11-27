@@ -1,4 +1,6 @@
 #include "Node.h"
+#include <iostream>
+
 
 Node::Node(string &newData){
 	mData = newData;
@@ -12,6 +14,7 @@ Node::Node(Node &copyNode) {
 	mpRight = copyNode.mpRight;
 }
 Node::~Node() {
+	// std::cout << "in Node destructor" << std::endl;
 	// maybe destructor 
 }
 

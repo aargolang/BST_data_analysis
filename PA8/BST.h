@@ -14,7 +14,7 @@ public:
 	void setRoot(TransactionNode *&newRoot);
 	Node *&getRoot();
 
-	bool insert(std::string &newDat); // newDat datatype is debatable
+	bool insert(std::string &newDat, int units); // newDat datatype is debatable
 	void inOrderTraversal();
 	TransactionNode &findSmallest();
 	TransactionNode &findLargest();
@@ -22,8 +22,8 @@ public:
 private:
 	Node *mpRoot;
 
-	bool destroyTree();
-	bool insert(Node *&pRoot, string &newDat);
+	void destroyTree(Node *&pRoot);
+	bool insert(Node *&pRoot, string &newDat, int units);
 	void inOrderTraversal(Node *&pRoot);
 
 };

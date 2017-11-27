@@ -1,13 +1,10 @@
 #include "BST.h"
 
 BST::BST() {
-
-}
-BST::BST(BST & copyBST) {
-
+	mpRoot = nullptr;
 }
 BST::~BST() {
-
+	destroyTree(this->mpRoot);
 }
 
 void BST::setRoot(TransactionNode *&newRoot) {
@@ -16,30 +13,69 @@ void BST::setRoot(TransactionNode *&newRoot) {
 Node *& BST::getRoot() {
 	return mpRoot;
 }
-bool BST::insert(std::string & newDat) {
+bool BST::insert(std::string & newDat, int units) {
 	bool success = false;
-	success = insert(this->mpRoot, newDat);
+	success = insert(this->mpRoot, newDat, units);
 	return success;
 }
 void BST::inOrderTraversal() {
-	// some recursion stuff here 
+	// some recursion stuff 
+	inOrderTraversal(this->mpRoot);
 }
 TransactionNode & BST::findSmallest() {
-	// TODO: fix this
-	TransactionNode n(string("The smallest node"),0);
-	return n;
+	// TODO: this is messy
+	Node *cur = this->getRoot();
+	while (cur->getLeft() != nullptr) {
+		cur = cur->getLeft();
+	}
+	
+	return *(dynamic_cast<TransactionNode*>(cur));
 }
 TransactionNode & BST::findLargest() {
-	// TODO: fix this
-	TransactionNode n(string("The largest node"), 0);
-	return n;
+	// TODO: this is messy
+	Node *cur = this->getRoot();
+	while (cur->getRight() != nullptr) {
+		cur = cur->getRight();
+	}
+
+	return *(dynamic_cast<TransactionNode*>(cur));
 }
-bool BST::destroyTree() {
-	return false;
+void BST::destroyTree(Node *&pRoot) {
+	// post order deletes
+	if (pRoot != nullptr) {
+		destroyTree(pRoot->getLeft());
+		destroyTree(pRoot->getRight());
+		delete pRoot;
+	}
 }
-bool BST::insert(Node *& pRoot, string & newDat) {
-	return false;
+bool BST::insert(Node *&parent, string & newDat, int units) {
+	bool success = false;		
+
+	if (parent == nullptr) {												// base case
+		TransactionNode *pMem;
+		pMem = new TransactionNode(newDat, units);
+		if (pMem != nullptr) {
+			parent = pMem;
+			return true;
+		}
+	}
+	else if (units > (dynamic_cast<TransactionNode*>(parent))->getUnits()) {	// Right recursion
+		success = insert(parent->getRight(), newDat, units);
+	}
+	else if (units < dynamic_cast<TransactionNode*>(parent)->getUnits()) {	// Left recursion 
+		success = insert(parent->getLeft(), newDat, units);
+	}
+	else { 
+		cout << "duplicates not allowed!" << endl; 
+	}
+
+	return success;
 }
 void BST::inOrderTraversal(Node *& pRoot) {
-
-}
+	if (pRoot != nullptr) {
+		inOrderTraversal(pRoot->getLeft());
+		cout << pRoot->getData() << ", " 
+			<< (dynamic_cast<TransactionNode*>(pRoot))->getUnits() << endl;
+		inOrderTraversal(pRoot->getRight());
+	}
+} 

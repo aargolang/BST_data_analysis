@@ -7,6 +7,7 @@ TransactionNode::TransactionNode(TransactionNode & copyNode): Node(copyNode) {
 	mUnits = copyNode.mUnits;
 }
 TransactionNode::~TransactionNode() {
+	cout << "in transaction node destructor" << endl;
 	// destroy something
 }
 
@@ -14,7 +15,7 @@ void TransactionNode::setUnits(int newUnits) {
 	mUnits = newUnits;
 }
 int TransactionNode::getUnits() {
-	return 0;
+	return mUnits;
 }
 void TransactionNode::printData() {
 	cout << "data is: " << mData << endl;
