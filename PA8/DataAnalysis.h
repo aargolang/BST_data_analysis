@@ -12,16 +12,20 @@ using std::endl;
 class DataAnalysis
 {
 public:
+	// constructors
 	DataAnalysis();
 	~DataAnalysis();
 
+	// public functions
 	void runAnalysis();
 
 private:
+	// private data members/streams
 	BST mTreeSold;
 	BST mTreePurchased;
 	std::ifstream mCsvStream;
 
+	// private functions
 	void openFile();
 	bool readLine();
 	void readFile();

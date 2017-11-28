@@ -7,24 +7,26 @@
 class BST
 {
 public:
+	// constructors
 	BST();
 	~BST();
 
+	// set/getters
 	void setRoot(TransactionNode *&newRoot);
 	Node *&getRoot();
 
-	bool insert(std::string &newDat, int units); // newDat datatype is debatable
+	// public functions
 	bool insert(TransactionNode *&newNode);
 	void inOrderTraversal();
 	TransactionNode &findSmallest();
 	TransactionNode &findLargest();
 
 private:
+	// private data members
 	Node *mpRoot;
 
+	// private functions
 	void destroyTree(Node *&pRoot);
-	bool insert(Node *&pRoot, string &newDat, int units);
 	bool insert(Node *&pRoot, TransactionNode *&pMem);
 	void inOrderTraversal(Node *&pRoot);
-
 };

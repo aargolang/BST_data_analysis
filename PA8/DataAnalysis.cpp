@@ -2,12 +2,10 @@
 
 DataAnalysis::DataAnalysis()
 {
-
+	// no default values needed
 }
 DataAnalysis::~DataAnalysis()
 {
-	mTreePurchased.~BST();
-	mTreeSold.~BST();
 	mCsvStream.close();
 }
 void DataAnalysis::runAnalysis()
@@ -15,7 +13,6 @@ void DataAnalysis::runAnalysis()
 	openFile();
 	readFile();
 	displayAnalysis();
-	cout << "stop" << endl;
 }
 void DataAnalysis::openFile()
 {
@@ -23,6 +20,7 @@ void DataAnalysis::openFile()
 }
 bool DataAnalysis::readLine()
 {
+	// reads the lines of the file into the trees
 	std::string buffer;
 	bool success = false;
 	if (std::getline(mCsvStream, buffer, ',')) 
@@ -37,16 +35,18 @@ bool DataAnalysis::readLine()
 	}
 	return success;
 }
-void DataAnalysis::readFile()
+void DataAnalysis::readFile()				
 {
+	// discard the first line and calls readLine till the stream reaches the end of the file
 	std::string buffer;
-	std::getline(mCsvStream, buffer, '\n'); // discard first line
-	while (mCsvStream.eof() == false) {
+	std::getline(mCsvStream, buffer, '\n');
+	while (mCsvStream.eof() == false) {		
 		readLine();
 	}
 }
 void DataAnalysis::sortTransactions(TransactionNode *&newNode, string &transactionType)
 {
+	// puts the node into the correct tree based on the type of transaction
 	if (transactionType == "Purchased") {
 		mTreePurchased.insert(newNode);
 	}
@@ -56,12 +56,13 @@ void DataAnalysis::sortTransactions(TransactionNode *&newNode, string &transacti
 }
 void DataAnalysis::displayAnalysis()
 {
+	// displays the largest and smallest values of each tree
 	TransactionNode *tempNode = &(mTreeSold.findSmallest());
 	cout << "least number of units sold: "<< tempNode->getData() << " at " << tempNode->getUnits() << " units." << endl;
 	tempNode = &(mTreeSold.findLargest());
 	cout << "most number of units sold: " << tempNode->getData() << " at " << tempNode->getUnits() << " units." << endl;
-	tempNode = &(mTreeSold.findLargest());
+	tempNode = &(mTreePurchased.findLargest());
 	cout << "least number of units purchased: " << tempNode->getData() << " at " << tempNode->getUnits() << " units." << endl;
-	tempNode = &(mTreeSold.findLargest());
+	tempNode = &(mTreePurchased.findSmallest());
 	cout << "most number of units purchased: " << tempNode->getData() << " at " << tempNode->getUnits() << " units." << endl;
 }

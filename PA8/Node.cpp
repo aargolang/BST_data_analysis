@@ -14,8 +14,7 @@ Node::Node(Node &copyNode) {
 	mpRight = copyNode.mpRight;
 }
 Node::~Node() {
-	// std::cout << "in Node destructor" << std::endl;
-	// maybe destructor 
+	// nothing needed
 }
 
 void Node::setData(string newDat) {
