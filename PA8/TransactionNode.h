@@ -11,7 +11,7 @@ using std::endl;
 class TransactionNode : public Node
 {
 public:
-	TransactionNode(string &newData, int newUnits = 0);
+	TransactionNode(string &newData = string(""), int newUnits = 0);
 	TransactionNode(TransactionNode &copyNode);
 	~TransactionNode();
 

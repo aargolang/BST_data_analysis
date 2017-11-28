@@ -18,6 +18,11 @@ bool BST::insert(std::string & newDat, int units) {
 	success = insert(this->mpRoot, newDat, units);
 	return success;
 }
+bool BST::insert(TransactionNode *&newNode) {
+	bool success = false;
+	success = insert(this->mpRoot, newNode);
+	return success;
+}
 void BST::inOrderTraversal() {
 	// some recursion stuff 
 	inOrderTraversal(this->mpRoot);
@@ -67,6 +72,28 @@ bool BST::insert(Node *&parent, string & newDat, int units) {
 	}
 	else { 
 		cout << "duplicates not allowed!" << endl; 
+	}
+
+	return success;
+}
+bool BST::insert(Node *&parent, TransactionNode *&pMem) {
+	// TODO: todo!
+	bool success = false;
+
+	if (parent == nullptr) {												// base 
+		if (pMem != nullptr) {
+			parent = pMem;
+			return true;
+		}
+	}
+	else if (pMem->getUnits() > (dynamic_cast<TransactionNode*>(parent))->getUnits()) {	// Right recursion
+		success = insert(parent->getRight(), pMem);
+	}
+	else if (pMem->getUnits() < dynamic_cast<TransactionNode*>(parent)->getUnits()) {	// Left recursion 
+		success = insert(parent->getLeft(), pMem);
+	}
+	else {
+		cout << "duplicates not allowed!" << endl;
 	}
 
 	return success;

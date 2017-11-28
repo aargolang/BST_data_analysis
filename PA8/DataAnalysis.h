@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include "BST.h"
+#include "Node.h"
+#include "TransactionNode.h"
 
 using std::cout;
 using std::endl;
@@ -21,8 +23,8 @@ private:
 	std::ifstream mCsvStream;
 
 	void openFile();
-	void readLine();
+	bool readLine();
 	void readFile();
-	void sortTransactions();
+	void sortTransactions(TransactionNode *&newNode, string &transactionType);
 	void displayAnalysis();
 };
